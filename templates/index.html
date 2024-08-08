@@ -1,0 +1,43 @@
+{% extends 'flatpage/default.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet" />
+<br>
+{% if request.user.is_authenticated %}
+<table>
+    <tr><td valign="top">
+    <div class="div_main">
+        <div class="div_profile"></div>
+    </div>
+    </td>
+    <td>
+    <div class="rightdiv">
+        <div class="div_chat"></div>
+    </div>
+    </td>
+    <td valign="top">
+    <div class="div_main">
+        <div class="div_rooms"></div>
+    </div>
+    <div class="div_main">
+        <div class="div_users"></div>
+    </div>
+    </td>
+    </tr>
+</table>
+    <script>
+        window.userID = {{request.user.id}};
+    </script>
+    <script src="{% static 'js/jsChat.js' %}"></script>
+
+{% else %}
+<form action="/accounts/login/">
+    <input type="submit" value="Авторизация" />
+</form>
+<br>
+<form action="/accounts/signup/">
+    <input type="submit" value="Регистрация" />
+</form>
+{% endif %}
+
+{% endblock %}
